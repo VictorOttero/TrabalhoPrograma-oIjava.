@@ -1,0 +1,33 @@
+}
+
+public class Funcionario extends Pessoa {
+    private String cargo;
+
+    public Funcionario(String nome, int idade, String cargo) {
+        super(nome, idade);
+        this.cargo = cargo;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    @Override
+    public void exibirDados() {
+        super.exibirDados();
+        System.out.println("Cargo: " + cargo);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Aluno aluno = new Aluno("João", 18, 12345);
+        aluno.exibirDados();
+
+        Professor professor = new Professor("Maria", 35, "Matemática");
+        professor.exibirDados();
+
+        Funcionario funcionario = new Funcionario("Carlos", 40, "Gerente");
+        funcionario.exibirDados();
+    }
+}
