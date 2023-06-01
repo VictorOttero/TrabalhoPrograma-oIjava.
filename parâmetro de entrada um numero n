@@ -1,0 +1,42 @@
+public class NumerosPrimos {
+    public static void main(String[] args) {
+        int n = 10; // Número fornecido
+        
+        int[] primos = obterNumerosPrimos(n);
+        
+        System.out.println("Os próximos " + n + " números primos após " + n + " são:");
+        for (int i = 0; i < primos.length; i++) {
+            System.out.print(primos[i] + " ");
+        }
+    }
+    
+    public static int[] obterNumerosPrimos(int n) {
+        int[] primos = new int[n];
+        int contador = 0;
+        int numero = n + 1;
+        
+        while (contador < n) {
+            if (ehPrimo(numero)) {
+                primos[contador] = numero;
+                contador++;
+            }
+            numero++;
+        }
+        
+        return primos;
+    }
+    
+    public static boolean ehPrimo(int numero) {
+        if (numero <= 1) {
+            return false;
+        }
+        
+        for (int i = 2; i <= Math.sqrt(numero); i++) {
+            if (numero % i == 0) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
