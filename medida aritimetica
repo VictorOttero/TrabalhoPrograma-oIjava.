@@ -1,0 +1,14 @@
+public class MediaAritmetica {
+    public static void main(String[] args) {
+        int[] vetor = {5, 10, 15, 20, 25}; // Vetor de exemplo
+        
+        int soma = 0;
+        for (int i = 0; i < vetor.length; i++) {
+            soma += vetor[i];
+        }
+        
+        double media = (double) soma / vetor.length;
+        
+        System.out.println("A média aritmética é: " + media);
+    }
+}
