@@ -1,0 +1,71 @@
+public class ContaBancaria {
+    private double saldo;
+    private double limiteSaque;
+
+    public ContaBancaria(double saldoInicial, double limiteSaque) {
+        this.saldo = saldoInicial;
+        this.limiteSaque = limiteSaque;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        if (saldo < 0) {
+            throw new IllegalArgumentException("Saldo não pode ser negativo.");
+        }
+        this.saldo = saldo;
+    }
+
+    public double getLimiteSaque() {
+        return limiteSaque;
+    }
+
+    public void setLimiteSaque(double limiteSaque) {
+        if (limiteSaque <= 0) {
+            throw new IllegalArgumentException("Limite de saque deve ser maior que zero.");
+        }
+        this.limiteSaque = limiteSaque;
+    }
+
+    public void sacar(double valor) throws SaldoInsuficienteException {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor do saque deve ser maior que zero.");
+        }
+        if (valor > saldo) {
+            throw new SaldoInsuficienteException("Saldo insuficiente para realizar o saque.");
+        }
+        if (valor > limiteSaque) {
+            throw new LimiteSaqueExcedidoException("Valor de saque excede o limite disponível.");
+        }
+        saldo -= valor;
+        System.out.println("Saque realizado com sucesso. Novo saldo: " + saldo);
+    }
+
+    public void depositar(double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor do depósito deve ser maior que zero.");
+        }
+        saldo += valor;
+        System.out.println("Depósito realizado com sucesso. Novo saldo: " + saldo);
+    }
+
+    public static void main(String[] args) {
+        try {
+            ContaBancaria conta = new ContaBancaria(1000.0, 500.0);
+            conta.sacar(200.0);
+            conta.depositar(300.0);
+            conta.setSaldo(-100.0); // Lançará uma exceção IllegalArgumentException
+            conta.setLimiteSaque(0.0); // Lançará uma exceção IllegalArgumentException
+            conta.sacar(800.0); // Lançará uma exceção SaldoInsuficienteException
+            conta.sacar(600.0); // Lançará uma exceção LimiteSaqueExcedidoException
+        } catch (SaldoInsuficienteException e) {
+            System.out.println("Erro: Saldo insuficiente.");
+        } catch (LimiteSaqueExcedidoException e) {
+            System.out.println("Erro: Limite de saque excedido.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+}
