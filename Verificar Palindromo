@@ -1,0 +1,25 @@
+public class VerificarPalindromo {
+    public static void main(String[] args) {
+        String palavra = "osso"; // String de exemplo
+        
+        boolean ehPalindromo = verificarPalindromo(palavra);
+        
+        if (ehPalindromo) {
+            System.out.println("A palavra '" + palavra + "' é um palíndromo.");
+        } else {
+            System.out.println("A palavra '" + palavra + "' não é um palíndromo.");
+        }
+    }
+    
+    public static boolean verificarPalindromo(String palavra) {
+        int tamanho = palavra.length();
+        
+        for (int i = 0; i < tamanho / 2; i++) {
+            if (palavra.charAt(i) != palavra.charAt(tamanho - 1 - i)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
